@@ -28,13 +28,15 @@
       // Lo mismo al boton solo hay 1, se lo paso a querySelector
       const button = document.querySelector("button ")
 
-      function MediaPlayer() {}
-
-      MediaPlayer.prototype.play = function() {
-        video.play();
+      function MediaPlayer(config) {
+        this.media = config.el
       }
 
-      const player = new MediaPlayer();
+      MediaPlayer.prototype.play = function() {
+        this.media.play();
+      }
+
+      const player = new MediaPlayer({ el: video });
       button.onclick = () => video.play();
       // el metodo .play esta disponible segun la API del DOM: https://developer.mozilla.org/es/docs/Web/API/HTMLMediaElement
     </script>
