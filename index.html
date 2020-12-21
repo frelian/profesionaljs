@@ -36,8 +36,21 @@
         this.media.play();
       }
 
+
+      MediaPlayer.prototype.pause = function () {
+        this.media.pause();
+      }
+
+      MediaPlayer.prototype.togglePlay = function () {
+        if (this.media.paused) {
+          this.play();
+        } else {
+          this.pause();
+        }
+      };
+
       const player = new MediaPlayer({ el: video });
-      button.onclick = () => player.play();
+      button.onclick = () => player.togglePlay();
       // el metodo .play esta disponible segun la API del DOM: https://developer.mozilla.org/es/docs/Web/API/HTMLMediaElement
     </script>
   </body>
