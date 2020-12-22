@@ -27,12 +27,15 @@ MediaPlayer.prototype.togglePlay = function () {
     }
 };
 
+// Implementacion para el mute del AutoPlay
 MediaPlayer.prototype.mute = function () {
-    this.media.muted = true;
+    this.media.muted = false;
 }
 
-MediaPlayer.prototype.unmute = function () {
-    this.media.muted = false;
+// Implementacion al hacer clic en Mute/Unmute
+MediaPlayer.prototype.toggleMute = function () {
+    // this.media.muted = false;
+    this.media.muted ? this.media.muted = false : this.media.muted = true;
 }
 
 export default MediaPlayer;
