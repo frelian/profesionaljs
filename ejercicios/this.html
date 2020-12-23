@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>THIS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <a href="/ejercicios/">Go Back</a>
+        <p><em>Abre la consola</em></p>
+
+        <h2><em>this</em> 
+            se refiere a un objeto. Este objeto es el que actualmente está ejecutando un bloque de código.
+        </h2>
+
+        <script>
+            // 1. this en el scope global
+             // console.log(`This: ${this}`); // imprime el objeto window
+
+            // 2. this en el scope de una funcion
+            function whoIsThis() {
+                return this;
+            } 
+
+            console.log(`whoIsThis(): ${whoIsThis()}`); // vuelve a mostrar el objeto window
+
+            // 3. this en el scope de una funcion en strict mode
+            // valor por dejecto de this sera window a excepcion si se usa strict mode:
+           
+            function whoIsThisStrictMode() {
+                "use strict";
+                return this;
+            } 
+            console.log(`whoIsThisStrictMode(): ${whoIsThisStrictMode()}`);
+
+            // 4. this en el contexto de un objeto
+            const person = {
+                name: 'Julian',
+                hey: function() {
+                    console.log(`Hola soy ${this.name}`);
+                }
+            }
+            person.hey();
+
+            // 5. this cuando sacamos a una funcion de un objeto
+            const accion = person.hey;
+            accion();
+
+            // 6. this en el contexto de una "clase"
+            // funciona como un constructor
+            function Person(name) {
+                // this = { }
+                this.name = name; // se asigna sobre la instancia
+            }
+
+            Person.prototype.saludar = function () {
+                console.log(`Me llamo ${this.name}`);
+            }
+            const maria = new Person("Maria");
+            maria.saludar();
+        </script>
+    </body>
+</html>

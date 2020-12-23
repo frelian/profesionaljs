@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Call, apply, bind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <a href="/ejercicios/">Go Back</a>
+    <p><em>Abre la consola</em></p>
+
+    <h2><em>this</em>
+        CALL, APPLY Y BIND
+    </h2>
+    <br>
+
+    <ul>
+        <li><button class="call-to-action">Aprender</button></li>
+        <li><button class="call-to-action">Aprender Más</button></li>
+        <li><button class="call-to-action">Nunca para de aprender</button></li>
+    </ul>
+
+
+    <script>
+        // 1. Establece this usando call
+        function saludar() {
+            console.log(`Hola. Soy ${this.name} ${this.surname}`);
+        }
+        const person = {
+            name: 'Julian',
+            surname: 'Niño',
+        }
+        saludar.call(person);
+
+        // 1.2 Establece this usando call y pasar argumentos a la funcion
+        function walk(meters, direction) {
+            console.log(`${this.name} walk ${meters} to ${direction}`);
+        }
+
+        // establezco el contexto del this para walk
+        walk.call(person, 500, "North");
+
+        // 2. Establece this usando apply y pasar argumentos a la funcion
+        // walk.apply(person, [800, "South"]);
+        const valores = [800, "South"];
+        walk.apply(person, valores);
+
+        // 3. Establecer this en una nueva funcion usando bind
+        const luisa = { name: "Luisa", surname: "Garzón" }
+        const heyLuisa = saludar.bind(luisa);
+        heyLuisa();
+
+        // si le hacen falta mas argumentos a la funcion
+        const walkLuisa = walk.bind(luisa, 1000);
+        walkLuisa(1000, "Est");
+        /* opcion 2
+            const walkLuisa = walk.bind(luisa);
+            walkLuisa(1000, 'est');
+
+            opcion 3
+            const walkLuisa = walk.bind(luisa, 1000, "Est");
+            walkLuisa(1000, 'est');
+        */
+
+        // Cuando es util usar uno de estos metodos
+        const buttons = document.getElementsByClassName("call-to-action");
+        // buttons genera error porque buttons es un NODELIST
+        //  buttons.forEach(buttonElement => {
+            //buttonElement.onclick = () => alert("Nunca pares de aprender!");
+        //});
+
+        // Uso buttons como contexto como this
+        Array.prototype.forEach.call(buttons, buttonElement => {
+            buttonElement.onclick = () => alert("Nunca pares de aprender!");
+        });
+
+    </script>
+</body>
+
+</html>
