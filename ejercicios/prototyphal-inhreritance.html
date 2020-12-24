@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Herencia prototypal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <a href="/ejercicios/">Go Back</a>
+    <p><em>Abre la consola</em></p>
+
+    <h2>
+        Herencia prototipal
+    </h2>
+    <ul>
+        <li>
+            someObject.prototype es un Objeto donde definimos el prototipo de las instancias de someObject.
+            Es decir, las intancias de someObject van a "heredar" de someObject.prototype.
+        </li>
+        <li>
+            someObject.[[Prototype]] es el prototipo de someObject.
+            Es decir, someObject van a "hereda" de someObject.prototype.
+        </li>
+    </ul>
+
+    <script>
+        function Hero(name) {
+            this.name = name;
+        }
+
+        Hero.prototype.saludar = function () {
+            console.log(`Hola, soy ${this.name}`);
+        }
+
+        const zelda = new Hero("Zelda");
+
+        // Propiedades de la instancia
+        console.log("Name: ", zelda.name);
+
+        // Propiedades de la "Clase"
+        // No voy a ejecutarla "zelda.saludar()" solo voy a referenciarla "zelda.saludar"
+        console.log("Name: ", zelda.saludar);
+
+        // Propiedades heredades ej: toString
+        console.log("toString: ", zelda.toString);
+
+        // hasOwnProperty (de donde sale toString o esto ?)
+        // Sirve para inspeccionar si algo le pertenece directamente a un objeto o si lo toma prestado atravez de Herencia 
+        console.log('zelda.hasOwnProperty("name"): ', zelda.hasOwnProperty("name"));
+        console.log('zelda.hasOwnProperty("saludar"): ', zelda.hasOwnProperty("saludar"));
+
+
+        // Inspeccionemos el prototipo del zelda
+        // Inspeccionemos el prototipo del Hero
+        // Inspeccionemos el prototipo del Object
+
+    </script>
+</body>
+
+</html>
