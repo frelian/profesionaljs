@@ -3,7 +3,8 @@ class AutoPause {
         this.threshold = 0.25;
 
         // usando bind, hago permanente el this a la instancia del objeto
-        this.handleIntersection = this.handleIntersection.bind(this);
+        this.handleIntersection     = this.handleIntersection.bind(this);
+        this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
     }
 
     run(player) {
@@ -14,21 +15,31 @@ class AutoPause {
 
         })
 
-        observer.observe(this.player.media)
+        observer.observe(this.player.media);
+
+        document.addEventListener("visibilitychange", this.handleVisibilityChange);
     }
 
     handleIntersection(entries) {
         const entry = entries[0];
 
-        const isVisible = entry.intersectionRatio >= this.threshold
+        const isVisible = entry.intersectionRatio >= this.threshold;
 
         if (isVisible) {
             this.player.play();
         } else {
             this.player.pause();
         }
-
         // console.log(entry);
+    }
+
+    handleVisibilityChange() {
+        const isVisible = document.visibilityState === "visible";
+        if (isVisible) {
+            this.player.play();
+        } else {
+            this.player.pause();
+        }
     }
 }
 
