@@ -17,3 +17,21 @@ const player = new MediaPlayer({
 
 buttonPlay.onclick = () => player.togglePlay();
 buttonMute.onclick = () => player.toggleMute();
+
+// Para detectar si el navegador soporta service worker
+if ('serviceWorker' in navigator) {
+
+    /* Otra opcion de capturar el error:
+        navigator.serviceWorker.register('./assets/sw.js').catch(error => {
+            console.log("Ups error: ", error.message);
+        });
+    */
+
+    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful :) with scope: ', registration.scope);
+    }, function (err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+    });
+}
