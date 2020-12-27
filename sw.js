@@ -26,14 +26,17 @@ async function precache() {
     // caches regresa una promesa entonces hay que esperarla usando await y async
     const cache = await caches.open(VERSION);
     return cache.addAll([
-        '/', 
-        '/index.html',
-        '/assets/index.js',
-        '/assets/MediaPlayer.js',
-        '/assets/plugins/AutoPlay.js',
-        '/assets/plugins/AutoPause.js',
-        '/assets/index.css',
-        '/assets/BigBuckBunny.mp4',
+        // Comentado ya que Parcel renombra los archivos en /dist
+        /*
+            '/', 
+            '/index.html',
+            '/assets/index.js',
+            '/assets/MediaPlayer.js',
+            '/assets/plugins/AutoPlay.js',
+            '/assets/plugins/AutoPause.js',
+            '/assets/index.css',
+            '/assets/BigBuckBunny.mp4',
+        */
     ]);
 }
 
